@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyText
+  color: MyText
+  series: MyText
+  casting_cost: MyText
+  converted_cost: 1
+  type: MyText
+  card_text: MyText
+  flavor_text: MyText
+  power: 1
+  toughneeess: 1
+
+two:
+  name: MyText
+  color: MyText
+  series: MyText
+  casting_cost: MyText
+  converted_cost: 1
+  type: MyText
+  card_text: MyText
+  flavor_text: MyText
+  power: 1
+  toughneeess: 1

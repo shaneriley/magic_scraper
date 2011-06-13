@@ -1,0 +1,10 @@
+source 'http://rubygems.org'
+
+gem 'rails'
+gem 'sqlite3'
+gem 'haml'
+gem 'haml-rails'
+gem 'sass'
+gem 'ruby-debug19', :require => 'ruby-debug'
+gem 'sqlite3-ruby', :require => 'sqlite3'
+gem 'hpricot'
