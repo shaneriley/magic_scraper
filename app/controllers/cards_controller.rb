@@ -2,10 +2,17 @@ class CardsController < ApplicationController
   require 'hpricot'
   require 'open-uri'
 
+  def index
+    @cards = Card.all
+  end
+
   def first_card
     @card = Card.new
     @cards = scrape_list
     @dom = Hpricot(open(@cards[0]))
+    @dom.search("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_cardImage").each {|i|
+      @card.image = "http://gatherer.wizards.com/#{i.attributes["src"].sub!("../", "")}"
+    }
     @card.name = @dom.search("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_nameRow .value").inner_html.strip
     @card.casting_cost = ""
     @dom.search("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_manaRow .value img").each do |cost|
@@ -39,13 +46,16 @@ class CardsController < ApplicationController
           cards.push(url + a.attributes["href"].sub!("../", ""))
         }
       end
-      cards
-      # create_cards(cards)
+      cards.each {|card| create_card(card) }
+      redirect_to cards_path
     end
 
-    def create_cards(cards)
+    def create_card(card)
       @card = Card.new
-      @dom = Hpricot(open(cards[0]))
+      @dom = Hpricot(open(card))
+      @dom.search("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_cardImage").each {|i|
+        @card.image = "http://gatherer.wizards.com/#{i.attributes["src"].sub!("../", "")}"
+      }
       @card.name = @dom.search("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_nameRow .value").inner_html.strip
       @card.casting_cost = ""
       @dom.search("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_manaRow .value img").each do |cost|
@@ -60,7 +70,7 @@ class CardsController < ApplicationController
       @card.power = pt[0]
       @card.toughness = pt[1]
       @card.series = @dom.search("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_setRow .value a:last-of-type").inner_html
-      @card.url = cards[0]
+      @card.url = card
       @card.save
     end
 end

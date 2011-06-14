@@ -1,0 +1,12 @@
+%table
+  %thead
+    %tr
+      %th Name
+      %th Type
+      %th Mana Cost
+  %tbody
+    - @cards.each do |card|
+      %tr
+        %td= link_to card.name, cards_show_path(card)
+        %td= card.card_type
+        %td= card.casting_cost
