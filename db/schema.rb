@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(:version => 20110613104324) do
     t.text     "series"
     t.text     "casting_cost"
     t.integer  "converted_cost"
-    t.text     "type"
+    t.text     "card_type"
     t.text     "card_text"
     t.text     "flavor_text"
     t.integer  "power"

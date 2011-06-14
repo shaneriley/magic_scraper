@@ -1,0 +1,18 @@
+%dl
+  %dt Name:
+  %dd= @card.name
+  %dt Casting Cost:
+  %dd= @card.casting_cost
+  %dt Converted Mana Cost:
+  %dd= @card.converted_cost
+  %dt Card Type:
+  %dd= @card.card_type
+  %dt Text:
+  %dd= @card.card_text
+  %dt Flavor Text:
+  %dd= @card.flavor_text
+  %dt Power/Toughness:
+  %dd== #{@card.power}/#{@card.toughness}
+  %dt Series:
+  %dd= @card.series
+  %dd= link_to "View on Wizards.com", @card.url
